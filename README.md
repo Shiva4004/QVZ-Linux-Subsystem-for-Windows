@@ -1,85 +1,146 @@
 # QVZ Linux Subsystem for Windows (QVZ-LSW)
 
-> **An independent, low-level systems project exploring how Windows binaries run on Linux**
+> **An independent, low-level operating systems research project exploring how Windows binaries execute on Linux**
 
 ---
 
-## Overview
+## Introduction
 
-**QVZ Linux Subsystem for Windows (QVZ-LSW)** is an **experimental, ground-up systems project** focused on running **Windows PE binaries on Linux** by re-implementing key parts of the Windows execution and loading model.
+**QVZ Linux Subsystem for Windows (QVZ-LSW)** is a long-term, experimental systems engineering project focused on **running Windows PE (Portable Executable) binaries on Linux** by re-implementing core parts of the Windows loader and execution model from scratch.
 
-This project is built for **deep technical understanding**, not for end-user compatibility or production use.
+This project exists to answer *how Windows really works at the lowest practical level*, not to provide a drop-in compatibility solution. Every component is built with the goal of understanding, not abstraction.
 
-It is **not**:
-
-* ❌ a Wine fork
-* ❌ an emulator
-* ❌ a virtual machine
-
-Instead, QVZ-LSW studies how Windows programs *actually start and execute*, and reproduces that behavior using native Linux mechanisms.
+QVZ-LSW is intentionally minimal, explicit, and research-driven.
 
 ---
 
-## What I Am Working On
+## What This Project Is — and Is Not
 
-Current development focuses on the **core Windows loader pipeline**, including:
+### This project **is**:
 
-* **PE (Portable Executable) parsing**
-* **Image mapping** into Linux process memory
-* **Base relocations**
-* **MinGW pseudo-relocations**
-* Windows **ABI and calling convention behavior**
-* Early subsystem design for Windows-style execution
+* A **from-scratch PE loader** targeting Linux
+* A deep exploration of **Windows loader internals**
+* A study of **relocations, ABI behavior, and binary startup**
+* A learning-oriented systems research effort
+* Designed to be **readable, inspectable, and debuggable**
 
-The emphasis is on correctness, clarity, and learning — not speed or feature completeness.
+### This project **is NOT**:
 
----
-
-## Project Goals
-
-* Understand Windows execution internals at a low level
-* Build a minimal Windows-style loader on Linux
-* Replicate Windows loader behavior through experimentation
-* Keep the codebase small, readable, and educational
+* ❌ A Wine fork or derivative
+* ❌ A virtual machine
+* ❌ A CPU or ISA emulator
+* ❌ A production-ready compatibility layer
+* ❌ A Microsoft-backed or Microsoft-related project
 
 ---
 
-## Current Status
+## Core Technical Focus
 
-* ✅ PE header and section parsing
-* ✅ Image loading and memory mapping
-* ⚠️ Relocation handling (actively being worked on)
-* ⛔ Import resolution (planned)
-* ⛔ Windows API / syscall layer (future work)
+QVZ-LSW focuses on the **earliest and most critical phase of Windows execution**: the loader.
+
+Key technical areas include:
+
+### 1. PE (Portable Executable) Internals
+
+* DOS header, NT headers, and optional headers
+* Section table parsing and validation
+* RVA vs VA resolution
+* Section alignment and permissions
+
+### 2. Image Mapping on Linux
+
+* Mapping PE images into Linux process memory
+* Handling executable, writable, and read-only sections
+* Correct image base handling
+* Page protections using native Linux facilities
+
+### 3. Relocation Handling
+
+* Base relocation blocks
+* Relocation types for PE64
+* Correct relocation math
+* **MinGW pseudo-relocations** (a major focus area)
+* Edge cases involving zero-initialized symbols
+
+### 4. ABI and Calling Convention Research
+
+* Windows x64 ABI vs System V ABI
+* Stack alignment rules
+* Register usage differences
+* Entry point calling semantics
+
+### 5. Subsystem Design
+
+* Designing a minimal Windows-style execution environment
+* Loader responsibility separation
+* Early groundwork for import resolution and API bridging
 
 ---
 
-## Important Disclaimer
+## Current Development Focus
 
-**This project is completely independent.**
+Active work is centered around:
 
-QVZ Linux Subsystem for Windows:
+* Finalizing a **correct and Windows-accurate PE64 loader**
+* Fixing subtle relocation bugs that differ from documented behavior
+* Studying how Windows initializes global symbols
+* Reverse-validating behavior against real Windows loaders
+* Incrementally stabilizing execution of simple PE programs
 
-* Has **no affiliation** with Microsoft
-* Is **not endorsed** by Microsoft or any other company
-* Does **not use proprietary Windows source code**
-* Is **not related** to Windows Subsystem for Linux (WSL)
+This phase prioritizes **correctness over speed** and **understanding over features**.
 
-This is a **personal research and learning project** developed independently.
+---
+
+## Planned Work (High-Level)
+
+The following are *research goals*, not promises:
+
+* Import table parsing and resolution
+* Minimal Windows API stubs (purely for experimentation)
+* Thread Local Storage (TLS) handling
+* Exception handling metadata parsing
+* Improved diagnostics and loader tracing
+
+---
+
+## Why This Project Exists
+
+Most compatibility layers hide complexity behind massive codebases.
+
+QVZ-LSW deliberately does the opposite.
+
+This project is built to:
+
+* Demystify Windows executable startup
+* Learn by re-implementation, not abstraction
+* Create a reference-quality loader that can be read end-to-end
+* Build deep intuition about cross-OS execution models
+
+If you are curious *how a Windows executable becomes a running program*, this project explores exactly that.
+
+---
+
+## Independence & Legal Disclaimer
+
+**QVZ Linux Subsystem for Windows is a completely independent project.**
+
+* No affiliation with **Microsoft**
+* No endorsement by Microsoft or any other company
+* No use of proprietary Windows source code
+* No relation to **Windows Subsystem for Linux (WSL)**
 
 All trademarks belong to their respective owners.
 
+This project is developed independently for **educational and research purposes only**.
+
 ---
 
-## Motivation
+## Philosophy
 
-Most compatibility layers hide the loader behind large abstractions.
-
-This project does the opposite.
-
-QVZ-LSW exists to answer one question:
-
-> *What actually happens when a Windows executable starts running?*
+* Clarity over cleverness
+* Correctness over shortcuts
+* Understanding over results
+* Small, inspectable code over massive frameworks
 
 ---
 
