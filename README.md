@@ -1,4 +1,4 @@
-# QVZ Linux Subsystem for Windows (QVZ-LSW)
+# QVZ Windows on Linux (QVZ-LOW)
 
 > **An independent, low-level operating systems research project exploring how Windows binaries execute on Linux**
 
@@ -6,11 +6,11 @@
 
 ## Introduction
 
-**QVZ Linux Subsystem for Windows (QVZ-LSW)** is a long-term, experimental systems engineering project focused on **running Windows PE (Portable Executable) binaries on Linux** by re-implementing core parts of the Windows loader and execution model from scratch.
+**QVZ Windows on Linux (QVZ-LOW)** is a long-term, experimental systems engineering project focused on **running Windows PE (Portable Executable) binaries on Linux** by re-implementing core parts of the Windows loader and execution model from scratch.
 
 This project exists to answer *how Windows really works at the lowest practical level*, not to provide a drop-in compatibility solution. Every component is built with the goal of understanding, not abstraction.
 
-QVZ-LSW is intentionally minimal, explicit, and research-driven.
+QVZ-LOW is intentionally minimal, explicit, and research-driven.
 
 ---
 
@@ -36,7 +36,7 @@ QVZ-LSW is intentionally minimal, explicit, and research-driven.
 
 ## Core Technical Focus
 
-QVZ-LSW focuses on the **earliest and most critical phase of Windows execution**: the loader.
+QVZ-LOW focuses on the **earliest and most critical phase of Windows execution**: the loader.
 
 Key technical areas include:
 
@@ -107,7 +107,7 @@ The following are *research goals*, not promises:
 
 Most compatibility layers hide complexity behind massive codebases.
 
-QVZ-LSW deliberately does the opposite.
+QVZ-LOW deliberately does the opposite.
 
 This project is built to:
 
@@ -122,7 +122,7 @@ If you are curious *how a Windows executable becomes a running program*, this pr
 
 ## Independence & Legal Disclaimer
 
-**QVZ Linux Subsystem for Windows is a completely independent project.**
+**QVZ Windows on Linux is a completely independent project.**
 
 * No affiliation with **Microsoft**
 * No endorsement by Microsoft or any other company
